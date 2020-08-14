@@ -6,16 +6,28 @@ import * as AppFooter from './components/footer.js'
 
 const styleTag = document.createElement('style');
 document.head.appendChild(styleTag);
-
 styleTag.appendChild(document.createTextNode(AppHeader.style || ''))
+
+styleTag.appendChild(
+    document.createTextNode(
+        (AppHeader.style || '')
+            .replace(
+                /\{\{parent\}\}/g,
+                `[data-cid-${AppHeader.script.name}]`
+            )
+    )
+)
 Vue.component(AppHeader.script.name, {
     ...AppHeader.script,
-    template: AppHeader.template
+    template: AppHeader.template.replace(
+        /<([a-z0-9]+)/,
+        `<$1 data-cid-${AppHeader.script.name}`
+    )
 })
 
 styleTag.appendChild(
     document.createTextNode(
-        AppContent.style
+        (AppContent.style || '')
             .replace(
                 /\{\{parent\}\}/g,
                 `[data-cid-${AppContent.script.name}]`
@@ -32,7 +44,7 @@ Vue.component(AppContent.script.name, {
 
 styleTag.appendChild(
     document.createTextNode(
-        AppFooter.style || ''
+        (AppFooter.style || '')
             .replace(
                 /\{\{parent\}\}/g,
                 `[data-cid-${AppFooter.script.name}]`

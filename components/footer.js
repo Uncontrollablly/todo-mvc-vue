@@ -27,7 +27,7 @@ export const script = {
 }
 
 export const style = `
-    {{parent}} .footer {
+    {{parent}}.footer {
         display: flex;
         align-items: center;
     }

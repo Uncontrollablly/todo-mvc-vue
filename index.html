@@ -14,6 +14,7 @@
     <app-header @add-todo="addTodo" @toggle-completed="toggleCompleted"></app-header>
     <app-content :display-todos="displayTodos" @delete-todo="deleteTodo"></app-content>
     <app-footer
+            v-show="displayTodos.length"
             :active-todos-number="activeTodos.length"
             :has-completed-todo="completedTodos.length === 0"
             :tag="tag"
