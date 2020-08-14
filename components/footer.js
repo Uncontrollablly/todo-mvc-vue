@@ -5,7 +5,7 @@ export const template = `
             <button :class="{checked: checkedButton ==='all'}" @click="onClick('all')">All</button>
             <button :class="{checked: checkedButton ==='active'}" @click="onClick('active')">Active</button>
             <button :class="{checked: checkedButton ==='completed'}" @click="onClick('completed')">Completed</button>
-            <button class="clear-completed" :class="{hide: hasCompletedTodo}" @click="$emit('clear-completed-todos')">Clear completed</button>
+            <button class="clear-completed" :class="{hide: !hasCompletedTodo}" @click="$emit('clear-completed-todos')">Clear completed</button>
         </div>
     </footer>
 `;
