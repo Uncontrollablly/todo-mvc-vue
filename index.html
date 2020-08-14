@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js • TodoMVC</title>
+    <link rel="stylesheet" href="http://todomvc.com/examples/vue/node_modules/todomvc-common/base.css">
+    <link rel="stylesheet" href="http://todomvc.com/examples/vue/node_modules/todomvc-app-css/index.css">
+    <style> [v-cloak] {
+        display: none;
+    } </style>
+</head>
+<body>
+<section class="todoapp" v-cloak>
+    <app-header @add-todo="addTodo" @toggle-completed="toggleCompleted"></app-header>
+    <app-content :display-todos="displayTodos" @delete-todo="deleteTodo"></app-content>
+    <app-footer
+            :active-todos-number="activeTodos.length"
+            :has-completed-todo="completedTodos.length === 0"
+            :tag="tag"
+            @show-tag="showTag"
+            @clear-completed-todos="clearCompletedTodos">
+    </app-footer>
+</section>
+<footer class="info">
+    <p>Double-click to edit a todo</p>
+    <p>Written by <a href="http://evanyou.me">Yuqi Wang</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
+<script type="module" src="index.js"></script>
+</body>
+</html>
