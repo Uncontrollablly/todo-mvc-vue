@@ -9,22 +9,24 @@ export const template = `
                 v-model="todo"
                 @keyup.enter="addTodo"
         >
-        <input
+        <div class="toggle-all-wrapper" v-show="haveTodos">
+            <input
                 id="toggle-all"
                 type="checkbox"
                 class="toggle-all"
                 v-model="toggleCompleted"
                 @change="$emit('toggle-completed', toggleCompleted)"
-        >
-        <label for="toggle-all">
-            "Mark all as complete"
-        </label>
+            >
+            <label for="toggle-all">
+                "Mark all as complete"
+            </label>
+        </div> 
     </header>
 `;
 
 export const script = {
     name: 'app-header',
-    props: ['toggle'],
+    props: ['haveTodos'],
     data: function () {
         return {
             title: 'todos',

@@ -12,7 +12,7 @@ export const template = `
 
 export const script = {
     name: 'app-footer',
-    props: ['activeTodosNumber', 'hasCompletedTodo', 'tag'],
+    props: {'activeTodosNumber': Number, 'hasCompletedTodo': Boolean, 'tag': String},
     data: function () {
         return {
             checkedButton: this.tag,
