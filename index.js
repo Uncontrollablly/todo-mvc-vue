@@ -1,8 +1,10 @@
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
-
+import Vuex, { mapState, mapGetters } from 'https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.esm.browser.js';
 import * as AppHeader from './components/header.js'
 import * as AppContent from './components/content.js'
 import * as AppFooter from './components/footer.js'
+
+Vue.use(Vuex)
 
 const styleTag = document.createElement('style');
 document.head.appendChild(styleTag);
@@ -66,12 +68,38 @@ Vue.component(AppFooter.script.name, {
 //     editing: boolean,
 // }
 // {id:0, text: 'learn vue', state: true, editing: false}
+
+const store = new Vuex.Store({
+    state: {
+        count: 0,
+    },
+    mutations: {
+        increment (state, payload) {
+            console.log('payload', payload.content);
+            state.count++;
+        }
+    }
+})
+
+Vue.directive('focus', {
+    bind: function (el) {
+        console.log('focus directive bind');
+        el.focus();
+    },
+    inserted: function (el) {
+        console.log('focus directive inserted');
+        // el.focus();
+    },
+})
+
 const app = new Vue({
     el: '.todoapp',
     data: {
         id: 0,
         tag: 'all',
-        todos: []
+        todos: [],
+        count1: store.state.count,
+        obj: {}
     },
     computed: {
         activeTodos: function () {
@@ -84,9 +112,19 @@ const app = new Vue({
             return this.tag === 'all' ?
                 this.todos :
                 (this.tag === 'active' ? this.activeTodos : this.completedTodos);
-        }
+        },
+        ...mapState(['count', 'newProp1']),
+    },
+    created() {
+        // Vue.set(this.$store.state, 'newProp1', 'abc');
+        // console.log(this.$store.state);
+        Vue.set(this.$data.obj, 'newProp2', 'abc');
+        console.log(this.$data);
     },
     methods: {
+        addCount: function () {
+            store.commit('increment', {content: 'hello'});
+        },
         addTodo: function (todo) {
             this.id += 1;
             const text = todo && todo.trim();
@@ -117,5 +155,6 @@ const app = new Vue({
     },
     components: {
         // 'app-content': AppContent
-    }
+    },
+    store,
 })

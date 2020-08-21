@@ -2,10 +2,10 @@ export const template = `
    <header class="header">
         <h1>{{ title }}</h1>
         <input
-                autofocus="autofocus"
                 autocomplete="off"
                 placeholder="What needs to be done?"
                 class="new-todo"
+                v-focus
                 v-model="todo"
                 @keyup.enter="addTodo"
         >
